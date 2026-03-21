@@ -1,0 +1,9 @@
+IMPORTANT: Open ios/Runner/Info.plist in VS Code and add these lines
+INSIDE the <dict> tag, just before the closing </dict> tag:
+
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Home Ease needs your location to show nearby service providers on the map.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Home Ease needs your location to show nearby service providers on the map.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Home Ease needs your location to show nearby service providers on the map.</string>
