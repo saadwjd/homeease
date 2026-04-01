@@ -1,0 +1,2511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HomeEase — UI Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #1A73E8;
+  --primary-dark: #1557B0;
+  --primary-light: #E8F0FE;
+  --accent: #34A853;
+  --accent-light: #E6F4EA;
+  --warning: #F9AB00;
+  --error: #D93025;
+  --text: #202124;
+  --text-sec: #5F6368;
+  --text-hint: #9AA0A6;
+  --bg: #F8F9FA;
+  --white: #ffffff;
+  --divider: #E8EAED;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 32px rgba(26,115,232,0.15);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: #0F1117; color: var(--text); overflow-x: hidden; }
+
+/* ── LAYOUT ── */
+.app-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: 280px;
+  background: #1A1D27;
+  padding: 28px 0;
+  position: fixed;
+  top: 0; bottom: 0; left: 0;
+  overflow-y: auto;
+  z-index: 100;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+
+.sidebar-logo {
+  padding: 0 24px 28px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 20px;
+}
+.sidebar-logo-inner {
+  display: flex; align-items: center; gap: 10px;
+}
+.sidebar-logo-icon {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--primary), #3B82F6);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.sidebar-logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; font-weight: 700;
+  color: white;
+}
+.sidebar-subtitle {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 4px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.sidebar-section {
+  padding: 0 16px 8px;
+}
+.sidebar-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.3);
+  padding: 8px 8px 6px;
+}
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: rgba(255,255,255,0.6);
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+.sidebar-item:hover { background: rgba(255,255,255,0.06); color: white; }
+.sidebar-item.active { background: var(--primary); color: white; }
+.sidebar-item .icon { font-size: 16px; width: 20px; text-align: center; }
+.sidebar-badge {
+  margin-left: auto;
+  background: var(--accent);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+/* ── MAIN CONTENT ── */
+.main {
+  margin-left: 280px;
+  flex: 1;
+  padding: 40px;
+  min-height: 100vh;
+}
+
+.page-header {
+  margin-bottom: 36px;
+}
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 900;
+  color: white;
+  margin-bottom: 6px;
+}
+.page-subtitle {
+  font-size: 14px;
+  color: rgba(255,255,255,0.4);
+}
+
+/* ── SCREEN GRID ── */
+.screens-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 28px;
+}
+
+/* ── PHONE FRAME ── */
+.phone-frame {
+  background: #1A1D27;
+  border-radius: 20px;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.phone-frame:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(26,115,232,0.2);
+  border-color: var(--primary);
+}
+.phone-frame-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.phone-frame-label .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.phone {
+  background: #111;
+  border-radius: 40px;
+  padding: 12px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
+  position: relative;
+}
+.phone-notch {
+  width: 80px; height: 20px;
+  background: #111;
+  border-radius: 0 0 14px 14px;
+  margin: 0 auto 6px;
+  position: relative; z-index: 2;
+}
+.phone-screen {
+  background: var(--bg);
+  border-radius: 30px;
+  overflow: hidden;
+  min-height: 480px;
+  position: relative;
+}
+
+/* ── SCREEN CONTENTS ── */
+
+/* Splash */
+.screen-splash {
+  background: linear-gradient(160deg, var(--primary) 0%, #1557B0 100%);
+  height: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.splash-icon {
+  width: 80px; height: 80px;
+  background: white;
+  border-radius: 22px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+.splash-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 900;
+  color: white;
+}
+.splash-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  text-align: center;
+  padding: 0 20px;
+}
+.splash-loader {
+  width: 24px; height: 24px;
+  border: 2.5px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-top: 20px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Onboarding */
+.screen-onboard {
+  height: 480px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background: white;
+}
+.onboard-skip {
+  text-align: right;
+  font-size: 11px;
+  color: var(--text-sec);
+  font-weight: 600;
+  padding: 4px 0 12px;
+}
+.onboard-emoji-wrap {
+  width: 90px; height: 90px;
+  background: var(--primary-light);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 44px;
+  margin: 0 auto 20px;
+}
+.onboard-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px; font-weight: 900;
+  color: var(--primary);
+  text-align: center; margin-bottom: 8px;
+}
+.onboard-desc {
+  font-size: 12px;
+  color: var(--text-sec);
+  text-align: center;
+  line-height: 1.6;
+  padding: 0 10px;
+  margin-bottom: 20px;
+}
+.onboard-dots {
+  display: flex; gap: 6px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.onboard-dot {
+  height: 6px; border-radius: 3px;
+  background: var(--divider);
+}
+.onboard-dot.active { width: 20px; background: var(--primary); }
+.onboard-dot:not(.active) { width: 6px; }
+.onboard-btn {
+  background: var(--primary);
+  color: white;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: auto;
+}
+
+/* Login */
+.screen-auth {
+  height: 480px;
+  padding: 20px 16px;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+}
+.auth-logo {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+.auth-logo-icon {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, var(--primary), #3B82F6);
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.auth-logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px; font-weight: 700;
+  color: var(--primary);
+}
+.auth-title {
+  font-size: 18px; font-weight: 800;
+  margin-bottom: 4px;
+  text-align: center;
+}
+.auth-sub {
+  font-size: 11px; color: var(--text-sec);
+  text-align: center; margin-bottom: 16px;
+}
+.google-btn {
+  background: white;
+  border: 1.5px solid var(--divider);
+  border-radius: 10px;
+  padding: 10px;
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px;
+  font-size: 12px; font-weight: 600;
+  margin-bottom: 12px;
+}
+.google-g {
+  width: 16px; height: 16px;
+  background: linear-gradient(135deg, #4285F4 25%, #34A853 25% 50%, #FBBC05 50% 75%, #EA4335 75%);
+  border-radius: 50%;
+}
+.divider-text {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 12px;
+  font-size: 10px; color: var(--text-hint);
+}
+.divider-text::before, .divider-text::after {
+  content: ''; flex: 1; height: 1px; background: var(--divider);
+}
+.input-field {
+  background: white;
+  border: 1.5px solid var(--divider);
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-size: 11px;
+  color: var(--text-sec);
+  margin-bottom: 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+.input-field .label {
+  font-size: 9px; color: var(--primary);
+  display: block; margin-bottom: 2px;
+}
+.primary-btn {
+  background: var(--primary);
+  color: white;
+  border-radius: 10px;
+  padding: 11px;
+  text-align: center;
+  font-size: 12px; font-weight: 700;
+  margin-top: 8px;
+}
+.auth-link {
+  text-align: center;
+  font-size: 10px;
+  color: var(--text-sec);
+  margin-top: 10px;
+}
+.auth-link span { color: var(--primary); font-weight: 600; }
+
+/* Home Screen */
+.screen-home {
+  height: 480px;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+}
+.home-header {
+  background: var(--primary);
+  padding: 14px 14px 20px;
+  color: white;
+}
+.home-header-top {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 12px;
+}
+.home-greeting { font-size: 11px; opacity: 0.8; }
+.home-name { font-size: 14px; font-weight: 700; }
+.home-notif {
+  width: 28px; height: 28px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  position: relative;
+}
+.notif-dot {
+  position: absolute; top: 4px; right: 4px;
+  width: 6px; height: 6px;
+  background: var(--warning);
+  border-radius: 50%;
+  border: 1px solid var(--primary);
+}
+.home-search {
+  background: white;
+  border-radius: 10px;
+  padding: 8px 12px;
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; color: var(--text-hint);
+}
+.home-body {
+  flex: 1; padding: 12px;
+  overflow: hidden;
+}
+.section-title-sm {
+  font-size: 12px; font-weight: 700;
+  margin-bottom: 8px;
+}
+.cats-row {
+  display: flex; gap: 8px; overflow-x: auto;
+  margin-bottom: 12px;
+  padding-bottom: 4px;
+}
+.cat-item {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  min-width: 52px;
+}
+.cat-icon {
+  width: 44px; height: 44px;
+  background: var(--primary-light);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+.cat-label { font-size: 9px; color: var(--text-sec); font-weight: 500; }
+
+.provider-mini-card {
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 6px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.provider-mini-avatar {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 700; font-size: 14px;
+  flex-shrink: 0;
+}
+.provider-mini-name { font-size: 11px; font-weight: 700; }
+.provider-mini-role { font-size: 9px; color: var(--text-sec); }
+.provider-mini-stars { font-size: 9px; color: var(--warning); }
+.provider-mini-price {
+  margin-left: auto;
+  font-size: 11px; font-weight: 700;
+  color: var(--primary);
+}
+
+/* Bottom Nav */
+.bottom-nav {
+  display: flex;
+  background: white;
+  border-top: 1px solid var(--divider);
+  padding: 8px 0 4px;
+}
+.nav-item {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  font-size: 9px;
+  color: var(--text-hint);
+  font-weight: 500;
+}
+.nav-item.active { color: var(--primary); }
+.nav-item .nav-icon { font-size: 18px; }
+
+/* Service Listing */
+.screen-services {
+  height: 480px;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+}
+.services-appbar {
+  background: white;
+  padding: 12px 14px;
+  display: flex; align-items: center; gap: 8px;
+  border-bottom: 1px solid var(--divider);
+}
+.back-btn {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
+.appbar-title { font-size: 14px; font-weight: 700; }
+.filter-btn {
+  margin-left: auto;
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  background: var(--primary-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
+.search-bar {
+  margin: 10px 12px;
+  background: white;
+  border-radius: 10px;
+  padding: 8px 12px;
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; color: var(--text-hint);
+  border: 1.5px solid var(--divider);
+}
+.chips-row {
+  display: flex; gap: 6px; padding: 0 12px 8px;
+  overflow-x: auto;
+}
+.chip {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 10px; font-weight: 600;
+  border: 1px solid var(--divider);
+  background: white;
+  color: var(--text-sec);
+  white-space: nowrap;
+}
+.chip.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+.provider-card-full {
+  background: white;
+  margin: 0 12px 8px;
+  border-radius: 12px;
+  padding: 12px;
+  display: flex; gap: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.provider-avatar-lg {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  background: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 700; font-size: 18px;
+  flex-shrink: 0;
+}
+.provider-name { font-size: 13px; font-weight: 700; }
+.provider-skills { font-size: 10px; color: var(--text-sec); margin: 2px 0; }
+.provider-rating { font-size: 10px; color: var(--warning); }
+.provider-price-col {
+  margin-left: auto;
+  text-align: right;
+}
+.price-val { font-size: 13px; font-weight: 700; color: var(--primary); }
+.price-unit { font-size: 9px; color: var(--text-hint); }
+.verified-badge {
+  display: inline-flex; align-items: center; gap: 3px;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 9px; font-weight: 600;
+  padding: 2px 6px; border-radius: 6px;
+}
+
+/* Provider Profile */
+.screen-profile {
+  height: 480px;
+  background: var(--bg);
+  overflow: hidden;
+}
+.profile-header {
+  background: linear-gradient(160deg, var(--primary-dark), var(--primary));
+  padding: 14px 14px 24px;
+  color: white;
+  text-align: center;
+}
+.profile-back {
+  text-align: left;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+.profile-avatar {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; font-weight: 700;
+  margin: 0 auto 8px;
+  border: 2px solid rgba(255,255,255,0.4);
+}
+.profile-name { font-size: 16px; font-weight: 700; }
+.profile-avail {
+  display: inline-block;
+  background: var(--accent);
+  font-size: 10px;
+  padding: 2px 10px;
+  border-radius: 12px;
+  margin-top: 4px;
+}
+.profile-stats {
+  display: flex; gap: 8px;
+  padding: 10px 12px;
+}
+.stat-chip {
+  flex: 1;
+  background: white;
+  border-radius: 10px;
+  padding: 8px;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.stat-val { font-size: 14px; font-weight: 800; color: var(--primary); }
+.stat-label { font-size: 9px; color: var(--text-hint); }
+.profile-section {
+  padding: 8px 12px;
+}
+.profile-section-title {
+  font-size: 11px; font-weight: 700; margin-bottom: 6px;
+}
+.skills-wrap { display: flex; gap: 4px; flex-wrap: wrap; }
+.skill-tag {
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 9px; font-weight: 600;
+  padding: 3px 8px; border-radius: 6px;
+}
+.profile-actions {
+  display: flex; gap: 8px;
+  padding: 8px 12px;
+}
+.action-btn-outline {
+  flex: 1;
+  border: 1.5px solid var(--primary);
+  color: var(--primary);
+  border-radius: 10px;
+  padding: 9px;
+  text-align: center;
+  font-size: 11px; font-weight: 600;
+}
+.action-btn-fill {
+  flex: 2;
+  background: var(--primary);
+  color: white;
+  border-radius: 10px;
+  padding: 9px;
+  text-align: center;
+  font-size: 11px; font-weight: 700;
+}
+
+/* Booking */
+.screen-booking {
+  height: 480px;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+}
+.booking-header {
+  background: var(--primary);
+  padding: 12px 14px;
+  color: white;
+}
+.booking-provider-row {
+  display: flex; align-items: center; gap: 8px;
+}
+.booking-avatar {
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+}
+.booking-pname { font-size: 12px; font-weight: 700; }
+.booking-prole { font-size: 10px; opacity: 0.7; }
+.booking-body { flex: 1; padding: 12px; overflow: hidden; }
+.booking-section-title {
+  font-size: 11px; font-weight: 700; margin-bottom: 8px;
+}
+.calendar-row {
+  display: flex; gap: 6px; margin-bottom: 12px;
+}
+.cal-day {
+  flex: 1;
+  background: white;
+  border-radius: 8px;
+  padding: 6px 4px;
+  text-align: center;
+  font-size: 9px;
+}
+.cal-day.selected { background: var(--primary); color: white; }
+.cal-day-name { font-size: 8px; opacity: 0.7; margin-bottom: 2px; }
+.cal-day-num { font-size: 12px; font-weight: 700; }
+.time-slots {
+  display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px;
+}
+.time-slot {
+  background: white;
+  border: 1.5px solid var(--divider);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 10px; font-weight: 500;
+}
+.time-slot.selected {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+.payment-row {
+  display: flex; gap: 6px; margin-bottom: 12px;
+}
+.payment-opt {
+  flex: 1;
+  background: white;
+  border: 1.5px solid var(--divider);
+  border-radius: 8px;
+  padding: 8px;
+  text-align: center;
+  font-size: 10px;
+}
+.payment-opt.selected {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  color: var(--primary);
+  font-weight: 600;
+}
+.confirm-btn {
+  background: var(--primary);
+  color: white;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  font-size: 13px; font-weight: 700;
+}
+
+/* Chat */
+.screen-chat {
+  height: 480px;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+}
+.chat-header {
+  background: var(--primary);
+  padding: 12px 14px;
+  display: flex; align-items: center; gap: 8px;
+  color: white;
+}
+.chat-avatar {
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 13px;
+  position: relative;
+}
+.online-dot {
+  position: absolute; bottom: 0; right: 0;
+  width: 8px; height: 8px;
+  background: #00E676;
+  border-radius: 50%;
+  border: 1.5px solid var(--primary);
+}
+.chat-name { font-size: 13px; font-weight: 700; }
+.chat-status { font-size: 10px; color: #00E676; }
+.chat-messages {
+  flex: 1; padding: 10px 12px;
+  display: flex; flex-direction: column; gap: 6px;
+  overflow: hidden;
+}
+.msg {
+  max-width: 75%;
+  padding: 8px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.msg-time { font-size: 8px; opacity: 0.6; margin-top: 3px; }
+.msg.received {
+  background: white;
+  color: var(--text);
+  border-bottom-left-radius: 3px;
+  align-self: flex-start;
+}
+.msg.sent {
+  background: var(--primary);
+  color: white;
+  border-bottom-right-radius: 3px;
+  align-self: flex-end;
+  text-align: right;
+}
+.chat-input {
+  padding: 8px 12px;
+  background: white;
+  border-top: 1px solid var(--divider);
+  display: flex; gap: 6px; align-items: center;
+}
+.chat-input-field {
+  flex: 1;
+  background: var(--bg);
+  border-radius: 20px;
+  padding: 7px 12px;
+  font-size: 11px;
+  color: var(--text-hint);
+}
+.chat-attach {
+  width: 30px; height: 30px;
+  background: var(--primary-light);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
+.chat-send {
+  width: 30px; height: 30px;
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  color: white;
+}
+
+/* Dashboard */
+.screen-dashboard {
+  height: 480px;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+}
+.dash-header {
+  background: white;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--divider);
+}
+.dash-title { font-size: 15px; font-weight: 700; }
+.dash-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--divider);
+}
+.dash-tab {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  font-size: 10px; font-weight: 600;
+  color: var(--text-hint);
+}
+.dash-tab.active {
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary);
+}
+.profile-tab-content {
+  flex: 1; padding: 12px; overflow: hidden;
+}
+.profile-hero {
+  display: flex; flex-direction: column; align-items: center;
+  margin-bottom: 12px;
+}
+.profile-user-avatar {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 22px; font-weight: 700;
+  position: relative;
+  margin-bottom: 8px;
+}
+.camera-badge {
+  position: absolute; bottom: 0; right: 0;
+  width: 18px; height: 18px;
+  background: var(--primary-dark);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  border: 1.5px solid white;
+}
+.user-name { font-size: 14px; font-weight: 700; }
+.user-email { font-size: 10px; color: var(--text-sec); }
+.info-field {
+  background: white;
+  border-radius: 10px;
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  display: flex; align-items: center; gap: 8px;
+}
+.field-label { font-size: 9px; color: var(--text-hint); display: block; }
+.field-val { font-size: 11px; font-weight: 500; }
+
+/* Provider Dashboard */
+.screen-provider {
+  height: 480px;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+}
+.provider-appbar {
+  background: var(--primary);
+  padding: 12px 14px;
+  color: white;
+}
+.provider-appbar-top {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 2px;
+}
+.provider-dash-title { font-size: 14px; font-weight: 700; }
+.toggle-row {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 10px;
+}
+.toggle {
+  width: 28px; height: 16px;
+  background: var(--accent);
+  border-radius: 8px;
+  position: relative;
+}
+.toggle::after {
+  content: '';
+  position: absolute;
+  width: 12px; height: 12px;
+  background: white;
+  border-radius: 50%;
+  top: 2px; right: 2px;
+}
+.provider-skills-sub { font-size: 10px; opacity: 0.7; }
+.stats-row {
+  display: flex; gap: 6px;
+  padding: 8px 12px;
+}
+.stat-card {
+  flex: 1;
+  border-radius: 10px;
+  padding: 8px;
+  text-align: center;
+}
+.provider-tabs {
+  display: flex;
+  background: var(--primary);
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+.provider-tab {
+  flex: 1;
+  padding: 8px;
+  text-align: center;
+  font-size: 9px; font-weight: 600;
+  color: rgba(255,255,255,0.6);
+}
+.provider-tab.active {
+  color: white;
+  border-bottom: 2px solid white;
+}
+.request-card {
+  background: white;
+  margin: 6px 10px;
+  border-radius: 10px;
+  padding: 10px;
+}
+.request-top {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 6px;
+}
+.service-badge {
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 9px; font-weight: 600;
+  padding: 2px 8px; border-radius: 6px;
+}
+.request-amount { font-size: 13px; font-weight: 700; color: var(--primary); }
+.request-detail { font-size: 9px; color: var(--text-sec); margin-bottom: 2px; }
+.request-actions { display: flex; gap: 6px; margin-top: 8px; }
+.decline-btn {
+  flex: 1;
+  border: 1.5px solid var(--error);
+  color: var(--error);
+  border-radius: 8px;
+  padding: 6px;
+  text-align: center;
+  font-size: 10px; font-weight: 600;
+}
+.accept-btn {
+  flex: 1;
+  background: var(--accent);
+  color: white;
+  border-radius: 8px;
+  padding: 6px;
+  text-align: center;
+  font-size: 10px; font-weight: 700;
+}
+
+/* Settings */
+.screen-settings {
+  height: 480px;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+}
+.settings-content { flex: 1; padding: 10px; overflow: hidden; }
+.switch-provider-banner {
+  background: linear-gradient(135deg, var(--primary), #3B82F6);
+  border-radius: 12px;
+  padding: 10px 12px;
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 8px;
+  color: white;
+}
+.switch-icon {
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.switch-title { font-size: 11px; font-weight: 700; }
+.switch-sub { font-size: 9px; opacity: 0.8; }
+.settings-tile {
+  background: white;
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 6px;
+}
+.settings-tile-icon {
+  width: 30px; height: 30px;
+  background: var(--primary-light);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
+.settings-tile-title { font-size: 12px; font-weight: 600; }
+.settings-tile-sub { font-size: 9px; color: var(--text-hint); }
+.chevron { margin-left: auto; color: var(--text-hint); font-size: 12px; }
+.signout-btn {
+  border: 1.5px solid var(--error);
+  color: var(--error);
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  font-size: 12px; font-weight: 600;
+  margin: 0 10px;
+}
+
+/* Notifications */
+.screen-notifs {
+  height: 480px;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+}
+.notif-item {
+  display: flex; gap: 10px;
+  padding: 10px 12px;
+  background: var(--primary-light);
+  border-bottom: 1px solid var(--divider);
+}
+.notif-item.read { background: white; }
+.notif-icon-wrap {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.notif-title { font-size: 11px; font-weight: 700; margin-bottom: 2px; }
+.notif-body { font-size: 10px; color: var(--text-sec); line-height: 1.4; }
+.notif-time { font-size: 9px; color: var(--text-hint); margin-top: 3px; }
+.unread-dot {
+  width: 6px; height: 6px;
+  background: var(--primary);
+  border-radius: 50%;
+  margin-left: auto;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+/* Admin */
+.screen-admin {
+  height: 480px;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+}
+.admin-header {
+  background: #1A1D27;
+  padding: 12px 14px;
+  color: white;
+}
+.admin-title { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+.admin-tabs {
+  display: flex; gap: 4px;
+}
+.admin-tab {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 9px; font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.08);
+}
+.admin-tab.active { background: var(--primary); color: white; }
+.stats-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6px; padding: 10px;
+}
+.admin-stat-card {
+  border-radius: 10px;
+  padding: 10px;
+}
+.admin-stat-val { font-size: 22px; font-weight: 800; margin-bottom: 2px; }
+.admin-stat-label { font-size: 9px; color: var(--text-hint); }
+.admin-list { padding: 0 10px; }
+.admin-row {
+  background: white;
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 5px;
+}
+.admin-avatar {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 11px; font-weight: 700;
+}
+.admin-row-name { font-size: 11px; font-weight: 600; }
+.admin-row-sub { font-size: 9px; color: var(--text-sec); }
+.verify-badge {
+  margin-left: auto;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 9px; font-weight: 600;
+  cursor: pointer;
+}
+.verify-badge.verified { background: var(--accent-light); color: var(--accent); }
+.verify-badge.unverified { background: var(--primary-light); color: var(--primary); }
+
+/* Onboarding Screen */
+.screen-onboard2 {
+  height: 480px;
+  background: white;
+  display: flex; flex-direction: column;
+  padding: 16px;
+}
+
+/* Rating Screen */
+.screen-rating {
+  height: 480px;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+  padding: 14px;
+}
+.rating-provider {
+  display: flex; flex-direction: column; align-items: center;
+  margin-bottom: 16px;
+}
+.rating-avatar {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 22px; font-weight: 700;
+  margin-bottom: 8px;
+}
+.rating-name { font-size: 14px; font-weight: 700; }
+.rating-service {
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 10px; font-weight: 600;
+  padding: 3px 10px; border-radius: 10px;
+  margin-top: 4px;
+}
+.stars-row {
+  display: flex; justify-content: center; gap: 8px;
+  margin: 12px 0;
+}
+.star-icon { font-size: 28px; }
+.rating-label { text-align: center; font-size: 11px; color: var(--primary); font-weight: 600; margin-bottom: 12px; }
+.review-textarea {
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 11px;
+  color: var(--text-hint);
+  height: 70px;
+  margin-bottom: 10px;
+  border: 1.5px solid var(--divider);
+}
+.quick-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 12px; }
+.quick-tag {
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 9px; font-weight: 600;
+  padding: 3px 8px; border-radius: 10px;
+  border: 1px solid var(--primary);
+}
+
+/* Booking Detail */
+.screen-booking-detail {
+  height: 480px;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+}
+.booking-status-banner {
+  margin: 10px;
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.status-icon { font-size: 20px; }
+.status-title { font-size: 12px; font-weight: 700; }
+.status-sub { font-size: 9px; opacity: 0.8; }
+.detail-section {
+  background: white;
+  margin: 0 10px 8px;
+  border-radius: 10px;
+  padding: 10px;
+}
+.detail-section-title { font-size: 11px; font-weight: 700; margin-bottom: 8px; }
+.detail-row {
+  display: flex; gap: 8px; align-items: flex-start;
+  margin-bottom: 6px;
+}
+.detail-icon { font-size: 12px; color: var(--text-sec); margin-top: 1px; }
+.detail-label { font-size: 9px; color: var(--text-hint); }
+.detail-val { font-size: 11px; font-weight: 500; }
+.contact-actions { display: flex; gap: 6px; padding: 0 10px; margin-bottom: 8px; }
+.contact-btn {
+  flex: 1;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  font-size: 11px; font-weight: 600;
+}
+
+/* ── CONTENT SECTIONS ── */
+.content-section { display: none; }
+.content-section.active { display: block; }
+
+/* ── DESIGN TOKENS PANEL ── */
+.tokens-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.token-card {
+  background: #1A1D27;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.token-swatch {
+  width: 100%; height: 48px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.token-name { font-size: 12px; font-weight: 700; color: white; margin-bottom: 2px; }
+.token-value { font-size: 11px; color: rgba(255,255,255,0.4); font-family: monospace; }
+
+.type-sample {
+  background: #1A1D27;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 12px;
+}
+.type-label { font-size: 10px; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+
+/* ── COMPONENTS PANEL ── */
+.components-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+.component-card {
+  background: #1A1D27;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.component-label {
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 14px;
+}
+
+/* ── FLOW DIAGRAM ── */
+.flow-container {
+  background: #1A1D27;
+  border-radius: 16px;
+  padding: 28px;
+  border: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 24px;
+}
+.flow-title { font-size: 14px; font-weight: 700; color: white; margin-bottom: 20px; }
+.flow-row {
+  display: flex; align-items: center; gap: 8px;
+  flex-wrap: wrap;
+}
+.flow-node {
+  background: rgba(26,115,232,0.15);
+  border: 1.5px solid var(--primary);
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 11px; font-weight: 600;
+  color: white;
+}
+.flow-node.green {
+  background: rgba(52,168,83,0.15);
+  border-color: var(--accent);
+}
+.flow-node.yellow {
+  background: rgba(249,171,0,0.15);
+  border-color: var(--warning);
+}
+.flow-arrow { color: rgba(255,255,255,0.4); font-size: 16px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; padding: 20px; }
+}
+</style>
+</head>
+<body>
+<div class="app-wrapper">
+
+<!-- ── SIDEBAR ── -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-inner">
+      <div class="sidebar-logo-icon">🏠</div>
+      <div>
+        <div class="sidebar-logo-text">HomeEase</div>
+        <div class="sidebar-subtitle">UI Design System</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Screens</div>
+    <div class="sidebar-item active" onclick="showSection('splash')"><span class="icon">✨</span> Splash & Onboarding</div>
+    <div class="sidebar-item" onclick="showSection('auth')"><span class="icon">🔐</span> Login & Signup</div>
+    <div class="sidebar-item" onclick="showSection('home')"><span class="icon">🏠</span> Home Screen</div>
+    <div class="sidebar-item" onclick="showSection('services')"><span class="icon">🔍</span> Services & Providers</div>
+    <div class="sidebar-item" onclick="showSection('booking')"><span class="icon">📅</span> Booking Flow</div>
+    <div class="sidebar-item" onclick="showSection('chat')"><span class="icon">💬</span> Chat</div>
+    <div class="sidebar-item" onclick="showSection('dashboard')"><span class="icon">👤</span> User Dashboard</div>
+    <div class="sidebar-item" onclick="showSection('provider')"><span class="icon">🔧</span> Provider Dashboard</div>
+    <div class="sidebar-item" onclick="showSection('admin')"><span class="icon">⚙️</span> Admin Dashboard</div>
+    <div class="sidebar-item" onclick="showSection('notifs')"><span class="icon">🔔</span> Notifications</div>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Design</div>
+    <div class="sidebar-item" onclick="showSection('tokens')"><span class="icon">🎨</span> Design Tokens</div>
+    <div class="sidebar-item" onclick="showSection('components')"><span class="icon">🧩</span> Components</div>
+    <div class="sidebar-item" onclick="showSection('flows')"><span class="icon">🗺️</span> User Flows</div>
+  </div>
+</aside>
+
+<!-- ── MAIN ── -->
+<main class="main">
+
+  <!-- SPLASH & ONBOARDING -->
+  <div class="content-section active" id="section-splash">
+    <div class="page-header">
+      <div class="page-title">Splash & Onboarding</div>
+      <div class="page-subtitle">First launch experience — 5 screens</div>
+    </div>
+    <div class="screens-grid">
+
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Splash Screen</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-splash">
+              <div class="splash-icon">🏠</div>
+              <div class="splash-title">HomeEase</div>
+              <div class="splash-sub">Trusted home services at your fingertips</div>
+              <div class="splash-loader"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Onboarding 1</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-onboard">
+              <div class="onboard-skip">Skip</div>
+              <div class="onboard-emoji-wrap">🏠</div>
+              <div class="onboard-title">Welcome to HomeEase</div>
+              <div class="onboard-desc">Pakistan's most trusted home services platform. Find verified professionals instantly.</div>
+              <div class="onboard-dots">
+                <div class="onboard-dot active"></div>
+                <div class="onboard-dot"></div>
+                <div class="onboard-dot"></div>
+                <div class="onboard-dot"></div>
+              </div>
+              <div class="onboard-btn">Next →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Onboarding 2</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-onboard">
+              <div class="onboard-skip">Skip</div>
+              <div class="onboard-emoji-wrap">🛡️</div>
+              <div class="onboard-title">Verified Professionals</div>
+              <div class="onboard-desc">Every provider is ID-verified and background-checked before joining HomeEase.</div>
+              <div class="onboard-dots">
+                <div class="onboard-dot"></div>
+                <div class="onboard-dot active"></div>
+                <div class="onboard-dot"></div>
+                <div class="onboard-dot"></div>
+              </div>
+              <div class="onboard-btn">Next →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Onboarding 3</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-onboard">
+              <div class="onboard-skip">Skip</div>
+              <div class="onboard-emoji-wrap">⚡</div>
+              <div class="onboard-title">Book in Minutes</div>
+              <div class="onboard-desc">Browse, select a time slot, confirm and pay. The whole process takes under 2 minutes.</div>
+              <div class="onboard-dots">
+                <div class="onboard-dot"></div>
+                <div class="onboard-dot"></div>
+                <div class="onboard-dot active"></div>
+                <div class="onboard-dot"></div>
+              </div>
+              <div class="onboard-btn">Next →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Onboarding 4</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-onboard">
+              <div class="onboard-skip">Skip</div>
+              <div class="onboard-emoji-wrap">💬</div>
+              <div class="onboard-title">Chat & Track</div>
+              <div class="onboard-desc">Stay connected with your provider, get live updates and real-time notifications.</div>
+              <div class="onboard-dots">
+                <div class="onboard-dot"></div>
+                <div class="onboard-dot"></div>
+                <div class="onboard-dot"></div>
+                <div class="onboard-dot active"></div>
+              </div>
+              <div class="onboard-btn">Get Started 🚀</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- AUTH -->
+  <div class="content-section" id="section-auth">
+    <div class="page-header">
+      <div class="page-title">Login & Signup</div>
+      <div class="page-subtitle">Authentication flow — 3 screens</div>
+    </div>
+    <div class="screens-grid">
+
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Login Screen</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-auth">
+              <div class="auth-logo">
+                <div class="auth-logo-icon">🏠</div>
+                <div class="auth-logo-text">HomeEase</div>
+              </div>
+              <div class="auth-title">Welcome back!</div>
+              <div class="auth-sub">Sign in to continue to HomeEase</div>
+              <div class="google-btn">
+                <div class="google-g"></div>
+                Continue with Google
+              </div>
+              <div class="divider-text">or sign in with email</div>
+              <div class="input-field">
+                <span>📧</span>
+                <div><div class="label">Email address</div>student@example.com</div>
+              </div>
+              <div class="input-field">
+                <span>🔒</span>
+                <div><div class="label">Password</div>••••••••</div>
+              </div>
+              <div style="text-align:right;font-size:10px;color:var(--primary);margin:4px 0 8px;font-weight:600">Forgot password?</div>
+              <div class="primary-btn">Sign In</div>
+              <div class="auth-link">Don't have an account? <span>Sign Up</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Sign Up Screen</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-auth">
+              <div class="auth-title" style="margin-top:8px">Create Account</div>
+              <div class="auth-sub">Join Home Ease today</div>
+              <div style="display:flex;gap:8px;margin-bottom:12px">
+                <div style="flex:1;background:var(--primary-light);border:2px solid var(--primary);border-radius:10px;padding:10px;text-align:center">
+                  <div style="font-size:18px;margin-bottom:4px">🔍</div>
+                  <div style="font-size:10px;font-weight:700;color:var(--primary)">Find Services</div>
+                </div>
+                <div style="flex:1;background:white;border:1.5px solid var(--divider);border-radius:10px;padding:10px;text-align:center">
+                  <div style="font-size:18px;margin-bottom:4px">🔧</div>
+                  <div style="font-size:10px;font-weight:600;color:var(--text-sec)">Offer Services</div>
+                </div>
+              </div>
+              <div class="input-field"><span>👤</span><div><div class="label">Full Name</div>Ali Hassan</div></div>
+              <div class="input-field"><span>📧</span><div><div class="label">Email</div>ali@example.com</div></div>
+              <div class="input-field"><span>🔒</span><div><div class="label">Password</div>••••••••</div></div>
+              <div style="background:var(--accent-light);border:1.5px solid var(--accent);border-radius:10px;padding:8px;display:flex;align-items:center;gap:6px;margin-top:6px">
+                <div style="width:14px;height:14px;background:var(--accent);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;color:white">✓</div>
+                <div style="font-size:9px;color:var(--text-sec)">I agree to the <span style="color:var(--primary);font-weight:600">Terms</span> & <span style="color:var(--primary);font-weight:600">Privacy Policy</span></div>
+              </div>
+              <div class="primary-btn" style="margin-top:8px">Create Account</div>
+              <div class="auth-link">Already have an account? <span>Sign In</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Forgot Password</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-auth">
+              <div style="font-size:40px;text-align:center;margin:20px 0 12px">🔑</div>
+              <div class="auth-title">Reset Password</div>
+              <div class="auth-sub" style="margin-bottom:20px">Enter your email and we'll send you a reset link.</div>
+              <div class="input-field"><span>📧</span><div><div class="label">Email address</div>Enter your email</div></div>
+              <div class="primary-btn" style="margin-top:12px">Send Reset Link</div>
+              <div class="auth-link" style="margin-top:12px">← <span>Back to Login</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- HOME -->
+  <div class="content-section" id="section-home">
+    <div class="page-header">
+      <div class="page-title">Home Screen</div>
+      <div class="page-subtitle">Main user-facing screen with categories and nearby providers</div>
+    </div>
+    <div class="screens-grid">
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Home — User</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-home">
+              <div class="home-header">
+                <div class="home-header-top">
+                  <div>
+                    <div class="home-greeting">Good morning,</div>
+                    <div class="home-name">Ali Hassan 👋</div>
+                  </div>
+                  <div class="home-notif">🔔<div class="notif-dot"></div></div>
+                </div>
+                <div class="home-search">🔍 Search services, providers...</div>
+              </div>
+              <div class="home-body">
+                <div class="section-title-sm">Popular Services</div>
+                <div class="cats-row">
+                  <div class="cat-item"><div class="cat-icon">🔧</div><div class="cat-label">Plumber</div></div>
+                  <div class="cat-item"><div class="cat-icon">⚡</div><div class="cat-label">Electric</div></div>
+                  <div class="cat-item"><div class="cat-icon">🧹</div><div class="cat-label">Cleaner</div></div>
+                  <div class="cat-item"><div class="cat-icon">🎨</div><div class="cat-label">Painter</div></div>
+                  <div class="cat-item"><div class="cat-icon">❄️</div><div class="cat-label">AC Repair</div></div>
+                </div>
+                <div class="section-title-sm">Nearby Providers</div>
+                <div class="provider-mini-card">
+                  <div class="provider-mini-avatar">M</div>
+                  <div>
+                    <div class="provider-mini-name">Muhammad Ahmad</div>
+                    <div class="provider-mini-role">Plumber · 0.8km</div>
+                    <div class="provider-mini-stars">★★★★★ 4.9</div>
+                  </div>
+                  <div class="provider-mini-price">Rs.800/hr</div>
+                </div>
+                <div class="provider-mini-card">
+                  <div class="provider-mini-avatar" style="background:var(--accent)">B</div>
+                  <div>
+                    <div class="provider-mini-name">Bilal Electrician</div>
+                    <div class="provider-mini-role">Electrician · 1.2km</div>
+                    <div class="provider-mini-stars">★★★★★ 4.8</div>
+                  </div>
+                  <div class="provider-mini-price">Rs.1000/hr</div>
+                </div>
+              </div>
+              <div class="bottom-nav">
+                <div class="nav-item active"><div class="nav-icon">🏠</div>Home</div>
+                <div class="nav-item"><div class="nav-icon">🔍</div>Services</div>
+                <div class="nav-item"><div class="nav-icon">🗺️</div>Map</div>
+                <div class="nav-item"><div class="nav-icon">👤</div>Account</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Map Screen</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-home">
+              <div style="background:white;padding:10px 14px;border-bottom:1px solid var(--divider);display:flex;align-items:center;justify-content:space-between">
+                <div style="font-size:14px;font-weight:700">Providers Near You</div>
+                <div style="font-size:18px">🎯</div>
+              </div>
+              <div style="display:flex;gap:6px;padding:8px 12px;overflow-x:auto">
+                <div class="chip active">All</div>
+                <div class="chip">Plumber</div>
+                <div class="chip">Electrician</div>
+                <div class="chip">Cleaner</div>
+              </div>
+              <div style="flex:1;background:linear-gradient(135deg,#e8f4ea,#e8f0fe,#e8f4ea);display:flex;align-items:center;justify-content:center;position:relative;min-height:260px">
+                <div style="font-size:40px;opacity:0.3">🗺️</div>
+                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--primary);color:white;border-radius:50%;width:32px;height:36px;display:flex;align-items:center;justify-content:center;font-size:16px">📍</div>
+                <div style="position:absolute;top:30%;left:30%;background:var(--accent);color:white;border-radius:50%;width:24px;height:28px;display:flex;align-items:center;justify-content:center;font-size:12px">🔧</div>
+                <div style="position:absolute;top:40%;right:25%;background:var(--warning);color:white;border-radius:50%;width:24px;height:28px;display:flex;align-items:center;justify-content:center;font-size:12px">⚡</div>
+              </div>
+              <div style="padding:10px 12px;background:var(--primary);color:white;border-radius:20px;margin:8px 12px;text-align:center;font-size:12px;font-weight:700">3 providers available</div>
+              <div class="bottom-nav">
+                <div class="nav-item"><div class="nav-icon">🏠</div>Home</div>
+                <div class="nav-item"><div class="nav-icon">🔍</div>Services</div>
+                <div class="nav-item active"><div class="nav-icon">🗺️</div>Map</div>
+                <div class="nav-item"><div class="nav-icon">👤</div>Account</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="content-section" id="section-services">
+    <div class="page-header">
+      <div class="page-title">Services & Providers</div>
+      <div class="page-subtitle">Service listing with search, filter and provider profile</div>
+    </div>
+    <div class="screens-grid">
+
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Service Listing</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-services">
+              <div class="services-appbar">
+                <div class="back-btn">←</div>
+                <div class="appbar-title">Find Services</div>
+                <div class="filter-btn">⚙️</div>
+              </div>
+              <div class="search-bar">🔍 Search providers...</div>
+              <div class="chips-row">
+                <div class="chip active">All</div>
+                <div class="chip">Plumber</div>
+                <div class="chip">Electrician</div>
+                <div class="chip">Cleaner</div>
+                <div class="chip">Painter</div>
+              </div>
+              <div class="provider-card-full">
+                <div class="provider-avatar-lg">M</div>
+                <div style="flex:1">
+                  <div style="display:flex;align-items:center;gap:4px">
+                    <div class="provider-name">Muhammad Ahmad</div>
+                    <span style="color:var(--primary);font-size:12px">✓</span>
+                  </div>
+                  <div class="provider-skills">Plumber · Mason</div>
+                  <div class="provider-rating">★★★★★ 4.9 (127)</div>
+                </div>
+                <div class="provider-price-col">
+                  <div class="price-val">Rs.800</div>
+                  <div class="price-unit">per hour</div>
+                  <div style="font-size:9px;color:var(--accent);margin-top:4px">● Available</div>
+                </div>
+              </div>
+              <div class="provider-card-full">
+                <div class="provider-avatar-lg" style="background:var(--accent)">B</div>
+                <div style="flex:1">
+                  <div class="provider-name">Bilal Khan</div>
+                  <div class="provider-skills">Electrician · AC Repair</div>
+                  <div class="provider-rating">★★★★☆ 4.7 (89)</div>
+                </div>
+                <div class="provider-price-col">
+                  <div class="price-val">Rs.1000</div>
+                  <div class="price-unit">per hour</div>
+                  <div style="font-size:9px;color:var(--accent);margin-top:4px">● Available</div>
+                </div>
+              </div>
+              <div class="bottom-nav">
+                <div class="nav-item"><div class="nav-icon">🏠</div>Home</div>
+                <div class="nav-item active"><div class="nav-icon">🔍</div>Services</div>
+                <div class="nav-item"><div class="nav-icon">🗺️</div>Map</div>
+                <div class="nav-item"><div class="nav-icon">👤</div>Account</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Provider Profile</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-profile">
+              <div class="profile-header">
+                <div class="profile-back">←</div>
+                <div class="profile-avatar">M</div>
+                <div class="profile-name">Muhammad Ahmad <span style="font-size:12px">✓</span></div>
+                <div class="profile-avail">● Available</div>
+              </div>
+              <div class="profile-stats">
+                <div class="stat-chip"><div class="stat-val">4.9</div><div class="stat-label">Rating</div></div>
+                <div class="stat-chip"><div class="stat-val">127</div><div class="stat-label">Reviews</div></div>
+                <div class="stat-chip"><div class="stat-val">5yr</div><div class="stat-label">Experience</div></div>
+              </div>
+              <div class="profile-section">
+                <div class="profile-section-title">Services Offered</div>
+                <div class="skills-wrap">
+                  <div class="skill-tag">Plumbing</div>
+                  <div class="skill-tag">Mason</div>
+                  <div class="skill-tag">Roof Repair</div>
+                </div>
+              </div>
+              <div class="profile-section">
+                <div class="profile-section-title">About</div>
+                <div style="font-size:10px;color:var(--text-sec);line-height:1.5">5+ years experience. Specializes in emergency leaks and bathroom installation.</div>
+              </div>
+              <div class="profile-actions">
+                <div class="action-btn-outline">💬 Chat</div>
+                <div class="action-btn-fill">📅 Book Now</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BOOKING -->
+  <div class="content-section" id="section-booking">
+    <div class="page-header">
+      <div class="page-title">Booking Flow</div>
+      <div class="page-subtitle">Date/time selection, payment and booking confirmation</div>
+    </div>
+    <div class="screens-grid">
+
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Book a Service</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-booking">
+              <div class="booking-header">
+                <div style="font-size:11px;opacity:0.7;margin-bottom:6px">← Book a Service</div>
+                <div class="booking-provider-row">
+                  <div class="booking-avatar">M</div>
+                  <div><div class="booking-pname">Muhammad Ahmad</div><div class="booking-prole">Plumber · Rs.800/hr</div></div>
+                </div>
+              </div>
+              <div class="booking-body">
+                <div class="booking-section-title">Select Date</div>
+                <div class="calendar-row">
+                  <div class="cal-day"><div class="cal-day-name">Su</div><div class="cal-day-num">15</div></div>
+                  <div class="cal-day"><div class="cal-day-name">Mo</div><div class="cal-day-num">16</div></div>
+                  <div class="cal-day selected"><div class="cal-day-name">Tu</div><div class="cal-day-num">17</div></div>
+                  <div class="cal-day"><div class="cal-day-name">We</div><div class="cal-day-num">18</div></div>
+                  <div class="cal-day"><div class="cal-day-name">Th</div><div class="cal-day-num">19</div></div>
+                </div>
+                <div class="booking-section-title">Time Slot</div>
+                <div class="time-slots">
+                  <div class="time-slot">9:00 AM</div>
+                  <div class="time-slot selected">11:00 AM</div>
+                  <div class="time-slot">2:00 PM</div>
+                  <div class="time-slot">4:00 PM</div>
+                </div>
+                <div class="booking-section-title">Payment</div>
+                <div class="payment-row">
+                  <div class="payment-opt selected">💳 JazzCash</div>
+                  <div class="payment-opt">💵 Cash</div>
+                </div>
+                <div class="confirm-btn">Confirm Booking</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Booking Detail</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-booking-detail">
+              <div style="background:white;padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--divider)">
+                <div style="font-size:16px">←</div>
+                <div style="font-size:14px;font-weight:700">Booking Details</div>
+              </div>
+              <div class="booking-status-banner" style="background:rgba(52,168,83,0.1);border:1px solid rgba(52,168,83,0.3)">
+                <div class="status-icon">✅</div>
+                <div style="color:var(--accent)">
+                  <div class="status-title">Booking Confirmed!</div>
+                  <div class="status-sub">Provider has accepted your booking</div>
+                </div>
+              </div>
+              <div class="detail-section">
+                <div class="detail-section-title">Service Details</div>
+                <div class="detail-row"><span class="detail-icon">🔧</span><div><div class="detail-label">Service</div><div class="detail-val">Plumbing</div></div></div>
+                <div class="detail-row"><span class="detail-icon">👤</span><div><div class="detail-label">Provider</div><div class="detail-val">Muhammad Ahmad</div></div></div>
+                <div class="detail-row"><span class="detail-icon">📅</span><div><div class="detail-label">Date & Time</div><div class="detail-val">Tue, Mar 17 at 11:00 AM</div></div></div>
+                <div class="detail-row"><span class="detail-icon">📍</span><div><div class="detail-label">Address</div><div class="detail-val">DHA Phase 5, Lahore</div></div></div>
+              </div>
+              <div class="contact-actions">
+                <div class="contact-btn" style="background:var(--primary-light);color:var(--primary)">💬 Chat</div>
+                <div class="contact-btn" style="background:var(--accent-light);color:var(--accent)">📞 Call</div>
+              </div>
+              <div style="border:1.5px solid var(--error);color:var(--error);border-radius:10px;padding:9px;text-align:center;font-size:11px;font-weight:600;margin:0 10px">Cancel Booking</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Rate Service</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-rating">
+              <div style="text-align:left;font-size:14px;margin-bottom:8px">← Rate Your Experience</div>
+              <div class="rating-provider">
+                <div class="rating-avatar">M</div>
+                <div class="rating-name">Muhammad Ahmad</div>
+                <div class="rating-service">Plumbing</div>
+              </div>
+              <div style="text-align:center;font-size:13px;font-weight:700;margin-bottom:4px">How was your experience?</div>
+              <div class="stars-row">
+                <div class="star-icon">⭐</div>
+                <div class="star-icon">⭐</div>
+                <div class="star-icon">⭐</div>
+                <div class="star-icon">⭐</div>
+                <div class="star-icon">☆</div>
+              </div>
+              <div class="rating-label">Very Good — Exceeded expectations</div>
+              <div class="review-textarea">Write your review here...</div>
+              <div class="quick-tags">
+                <div class="quick-tag">+ Professional</div>
+                <div class="quick-tag">+ On time</div>
+                <div class="quick-tag">+ Good value</div>
+                <div class="quick-tag">+ Friendly</div>
+              </div>
+              <div class="primary-btn">Submit Review</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CHAT -->
+  <div class="content-section" id="section-chat">
+    <div class="page-header">
+      <div class="page-title">Chat</div>
+      <div class="page-subtitle">Real-time messaging with online status and media sharing</div>
+    </div>
+    <div class="screens-grid">
+
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Chat Inbox</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-home">
+              <div style="background:white;padding:12px 14px;border-bottom:1px solid var(--divider)">
+                <div style="font-size:15px;font-weight:700">Messages</div>
+              </div>
+              <div style="flex:1;overflow:hidden">
+                <div class="provider-mini-card" style="border-bottom:1px solid var(--divider);border-radius:0;padding:10px 14px;background:var(--primary-light)">
+                  <div class="provider-mini-avatar" style="position:relative">M<div style="position:absolute;bottom:0;right:0;width:8px;height:8px;background:var(--accent);border-radius:50%;border:1px solid white"></div></div>
+                  <div style="flex:1">
+                    <div style="display:flex;justify-content:space-between"><div class="provider-mini-name">Muhammad Ahmad</div><div style="font-size:9px;color:var(--text-hint)">2m ago</div></div>
+                    <div style="font-size:10px;color:var(--text-sec)">I'll be there by 11 AM</div>
+                  </div>
+                  <div style="width:16px;height:16px;background:var(--primary);border-radius:50%;font-size:9px;color:white;display:flex;align-items:center;justify-content:center">2</div>
+                </div>
+                <div class="provider-mini-card" style="border-bottom:1px solid var(--divider);border-radius:0;padding:10px 14px">
+                  <div class="provider-mini-avatar" style="background:var(--accent)">B</div>
+                  <div style="flex:1">
+                    <div style="display:flex;justify-content:space-between"><div class="provider-mini-name">Bilal Khan</div><div style="font-size:9px;color:var(--text-hint)">1h ago</div></div>
+                    <div style="font-size:10px;color:var(--text-sec)">📷 Photo</div>
+                  </div>
+                </div>
+              </div>
+              <div class="bottom-nav">
+                <div class="nav-item"><div class="nav-icon">🏠</div>Home</div>
+                <div class="nav-item"><div class="nav-icon">🔍</div>Services</div>
+                <div class="nav-item"><div class="nav-icon">🗺️</div>Map</div>
+                <div class="nav-item active"><div class="nav-icon">👤</div>Account</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Chat Screen</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-chat">
+              <div class="chat-header">
+                <div style="font-size:16px">←</div>
+                <div class="chat-avatar">M<div class="online-dot"></div></div>
+                <div>
+                  <div class="chat-name">Muhammad Ahmad</div>
+                  <div class="chat-status">Online</div>
+                </div>
+              </div>
+              <div class="chat-messages">
+                <div class="msg received">Hi! I can come at 11 AM. Does that work?<div class="msg-time">10:30 AM</div></div>
+                <div class="msg sent">Yes perfect, please bring your tools for a pipe leak.<div class="msg-time">10:31 AM ✓✓</div></div>
+                <div class="msg received">Sure, I'll handle it. Address?<div class="msg-time">10:32 AM</div></div>
+                <div class="msg sent">DHA Phase 5, House 23, Block B<div class="msg-time">10:33 AM ✓✓</div></div>
+                <div style="background:var(--primary);border-radius:12px;border-bottom-right-radius:3px;overflow:hidden;align-self:flex-end;max-width:60%">
+                  <div style="background:rgba(255,255,255,0.1);padding:4px 6px;font-size:9px;color:rgba(255,255,255,0.7)">📷 Photo</div>
+                  <div style="width:120px;height:80px;background:linear-gradient(135deg,#1557B0,#34A853);display:flex;align-items:center;justify-content:center;font-size:28px">🏠</div>
+                </div>
+              </div>
+              <div class="chat-input">
+                <div class="chat-attach">📎</div>
+                <div class="chat-input-field">Type a message...</div>
+                <div class="chat-send">➤</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="content-section" id="section-dashboard">
+    <div class="page-header">
+      <div class="page-title">User Dashboard</div>
+      <div class="page-subtitle">Profile, bookings history and settings</div>
+    </div>
+    <div class="screens-grid">
+
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Profile Tab</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-dashboard">
+              <div class="dash-header"><div class="dash-title">My Account</div></div>
+              <div class="dash-tabs">
+                <div class="dash-tab active">👤 Profile</div>
+                <div class="dash-tab">📅 Bookings</div>
+                <div class="dash-tab">⚙️ Settings</div>
+              </div>
+              <div class="profile-tab-content">
+                <div class="profile-hero">
+                  <div class="profile-user-avatar">A<div class="camera-badge">📷</div></div>
+                  <div class="user-name">Ali Hassan</div>
+                  <div class="user-email">ali@example.com</div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                  <div style="font-size:12px;font-weight:700">Personal Info</div>
+                  <div style="font-size:10px;color:var(--primary);font-weight:600">✏️ Edit</div>
+                </div>
+                <div class="info-field"><span>👤</span><div><div class="field-label">Full Name</div><div class="field-val">Ali Hassan</div></div></div>
+                <div class="info-field"><span>📱</span><div><div class="field-label">Phone</div><div class="field-val">+92 316 7635243</div></div></div>
+                <div class="info-field"><span>📍</span><div><div class="field-label">Address</div><div class="field-val">DHA Phase 5, Lahore</div></div></div>
+              </div>
+              <div class="bottom-nav">
+                <div class="nav-item"><div class="nav-icon">🏠</div>Home</div>
+                <div class="nav-item"><div class="nav-icon">🔍</div>Services</div>
+                <div class="nav-item"><div class="nav-icon">🗺️</div>Map</div>
+                <div class="nav-item active"><div class="nav-icon">👤</div>Account</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Settings Tab</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-settings">
+              <div class="dash-header"><div class="dash-title">My Account</div></div>
+              <div class="dash-tabs">
+                <div class="dash-tab">👤 Profile</div>
+                <div class="dash-tab">📅 Bookings</div>
+                <div class="dash-tab active">⚙️ Settings</div>
+              </div>
+              <div class="settings-content">
+                <div class="switch-provider-banner">
+                  <div class="switch-icon">🔄</div>
+                  <div>
+                    <div class="switch-title">Switch to Provider Dashboard</div>
+                    <div class="switch-sub">Manage your service bookings</div>
+                  </div>
+                  <div style="margin-left:auto;font-size:12px">›</div>
+                </div>
+                <div class="settings-tile"><div class="settings-tile-icon">🔔</div><div><div class="settings-tile-title">Notifications</div><div class="settings-tile-sub">View your notifications</div></div><div class="chevron">›</div></div>
+                <div class="settings-tile"><div class="settings-tile-icon">❓</div><div><div class="settings-tile-title">Help & Support</div><div class="settings-tile-sub">Get help with bookings</div></div><div class="chevron">›</div></div>
+                <div class="settings-tile"><div class="settings-tile-icon">ℹ️</div><div><div class="settings-tile-title">About HomeEase</div><div class="settings-tile-sub">Version 1.0.0</div></div><div class="chevron">›</div></div>
+              </div>
+              <div class="signout-btn">Sign Out</div>
+              <div class="bottom-nav">
+                <div class="nav-item"><div class="nav-icon">🏠</div>Home</div>
+                <div class="nav-item"><div class="nav-icon">🔍</div>Services</div>
+                <div class="nav-item"><div class="nav-icon">🗺️</div>Map</div>
+                <div class="nav-item active"><div class="nav-icon">👤</div>Account</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PROVIDER -->
+  <div class="content-section" id="section-provider">
+    <div class="page-header">
+      <div class="page-title">Provider Dashboard</div>
+      <div class="page-subtitle">Requests, bookings, earnings and profile management</div>
+    </div>
+    <div class="screens-grid">
+
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Requests Tab</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-provider">
+              <div class="provider-appbar">
+                <div class="provider-appbar-top">
+                  <div>
+                    <div class="provider-dash-title">My Dashboard</div>
+                    <div class="provider-skills-sub">Plumber · Mason</div>
+                  </div>
+                  <div class="toggle-row">
+                    <span style="font-size:9px">Online</span>
+                    <div class="toggle"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="provider-tabs">
+                <div class="provider-tab active">📥 Requests</div>
+                <div class="provider-tab">📅 Bookings</div>
+                <div class="provider-tab">💬 Messages</div>
+                <div class="provider-tab">👤 Profile</div>
+              </div>
+              <div style="display:flex;gap:6px;padding:8px 10px;background:var(--primary)">
+                <div class="stat-card" style="background:rgba(249,171,0,0.2)"><div style="font-size:18px;font-weight:800;color:var(--warning)">3</div><div style="font-size:9px;color:rgba(255,255,255,0.7)">Pending</div></div>
+                <div class="stat-card" style="background:rgba(96,165,250,0.2)"><div style="font-size:18px;font-weight:800;color:#60A5FA">5</div><div style="font-size:9px;color:rgba(255,255,255,0.7)">Active</div></div>
+                <div class="stat-card" style="background:rgba(52,168,83,0.2)"><div style="font-size:18px;font-weight:800;color:var(--accent)">12K</div><div style="font-size:9px;color:rgba(255,255,255,0.7)">Rs. Earned</div></div>
+              </div>
+              <div class="request-card">
+                <div class="request-top">
+                  <div class="service-badge">Plumbing Fix</div>
+                  <div class="request-amount">Rs. 800</div>
+                </div>
+                <div class="request-detail">👤 Ali Hassan</div>
+                <div class="request-detail">📅 Today · 11:00 AM</div>
+                <div class="request-detail">📍 DHA Phase 5, Lahore</div>
+                <div class="request-actions">
+                  <div class="decline-btn">Decline</div>
+                  <div class="accept-btn">Accept ✓</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Provider Profile Edit</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-provider">
+              <div class="provider-appbar">
+                <div class="provider-dash-title">My Dashboard</div>
+                <div class="provider-skills-sub">Plumber · Mason</div>
+              </div>
+              <div class="provider-tabs">
+                <div class="provider-tab">📥 Requests</div>
+                <div class="provider-tab">📅 Bookings</div>
+                <div class="provider-tab">💬 Messages</div>
+                <div class="provider-tab active">👤 Profile</div>
+              </div>
+              <div style="padding:10px;overflow:hidden">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+                  <div style="width:48px;height:48px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;color:white;font-size:18px;font-weight:700;position:relative">M<div style="position:absolute;bottom:0;right:0;width:14px;height:14px;background:var(--primary-dark);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:white;border:1px solid white">📷</div></div>
+                  <div>
+                    <div style="font-size:13px;font-weight:700">Muhammad Ahmad</div>
+                    <div style="font-size:10px;color:var(--warning)">★ 4.9 (127 reviews)</div>
+                  </div>
+                  <div style="margin-left:auto;font-size:10px;color:var(--primary);font-weight:600">✏️ Edit</div>
+                </div>
+                <div class="info-field"><span>📱</span><div><div class="field-label">Phone</div><div class="field-val">+92 300 1234567</div></div></div>
+                <div class="info-field"><span>👤</span><div><div class="field-label">Gender</div><div class="field-val">Male</div></div></div>
+                <div class="info-field"><span>💰</span><div><div class="field-label">Hourly Rate</div><div class="field-val">Rs. 800</div></div></div>
+                <div class="info-field"><span>📍</span><div><div class="field-label">Service Area</div><div class="field-val">DHA, Gulberg, Lahore</div></div></div>
+                <div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:6px">
+                  <div class="skill-tag">Plumbing ✓</div>
+                  <div class="skill-tag">Mason ✓</div>
+                  <div style="background:var(--bg);border:1px dashed var(--divider);color:var(--text-hint);font-size:9px;padding:3px 8px;border-radius:6px">+ Add</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ADMIN -->
+  <div class="content-section" id="section-admin">
+    <div class="page-header">
+      <div class="page-title">Admin Dashboard</div>
+      <div class="page-subtitle">Platform management — visible only to saadwajid65@gmail.com</div>
+    </div>
+    <div class="screens-grid">
+
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Overview</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-admin">
+              <div class="admin-header">
+                <div class="admin-title">Admin Dashboard</div>
+                <div class="admin-tabs">
+                  <div class="admin-tab active">Overview</div>
+                  <div class="admin-tab">Users</div>
+                  <div class="admin-tab">Providers</div>
+                  <div class="admin-tab">Bookings</div>
+                </div>
+              </div>
+              <div class="stats-grid">
+                <div class="admin-stat-card" style="background:rgba(26,115,232,0.1);border:1px solid rgba(26,115,232,0.2)"><div class="admin-stat-val" style="color:var(--primary)">24</div><div class="admin-stat-label">Total Users</div></div>
+                <div class="admin-stat-card" style="background:rgba(52,168,83,0.1);border:1px solid rgba(52,168,83,0.2)"><div class="admin-stat-val" style="color:var(--accent)">8</div><div class="admin-stat-label">Providers</div></div>
+                <div class="admin-stat-card" style="background:rgba(249,171,0,0.1);border:1px solid rgba(249,171,0,0.2)"><div class="admin-stat-val" style="color:var(--warning)">47</div><div class="admin-stat-label">Bookings</div></div>
+                <div class="admin-stat-card" style="background:rgba(217,48,37,0.1);border:1px solid rgba(217,48,37,0.2)"><div class="admin-stat-val" style="color:var(--error)">3</div><div class="admin-stat-label">Pending</div></div>
+              </div>
+              <div class="admin-list">
+                <div style="font-size:11px;font-weight:700;margin-bottom:6px">Recent Bookings</div>
+                <div class="admin-row">
+                  <div class="admin-avatar">A</div>
+                  <div><div class="admin-row-name">Plumbing · Ali Hassan</div><div class="admin-row-sub">Muhammad Ahmad</div></div>
+                  <div style="margin-left:auto;background:rgba(52,168,83,0.1);color:var(--accent);font-size:9px;font-weight:600;padding:3px 8px;border-radius:6px">confirmed</div>
+                </div>
+                <div class="admin-row">
+                  <div class="admin-avatar" style="background:var(--primary)">S</div>
+                  <div><div class="admin-row-name">Electrical · Sara K.</div><div class="admin-row-sub">Bilal Khan</div></div>
+                  <div style="margin-left:auto;background:rgba(249,171,0,0.1);color:var(--warning);font-size:9px;font-weight:600;padding:3px 8px;border-radius:6px">pending</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Providers — Verify</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-admin">
+              <div class="admin-header">
+                <div class="admin-title">Admin Dashboard</div>
+                <div class="admin-tabs">
+                  <div class="admin-tab">Overview</div>
+                  <div class="admin-tab">Users</div>
+                  <div class="admin-tab active">Providers</div>
+                  <div class="admin-tab">Bookings</div>
+                </div>
+              </div>
+              <div class="admin-list" style="padding-top:10px">
+                <div class="admin-row">
+                  <div class="admin-avatar">M</div>
+                  <div>
+                    <div class="admin-row-name">Muhammad Ahmad ✓</div>
+                    <div class="admin-row-sub">Plumber · ★4.9</div>
+                  </div>
+                  <div class="verify-badge verified">Verified ✓</div>
+                </div>
+                <div class="admin-row">
+                  <div class="admin-avatar" style="background:var(--warning)">B</div>
+                  <div>
+                    <div class="admin-row-name">Bilal Khan</div>
+                    <div class="admin-row-sub">Electrician · ★4.7</div>
+                  </div>
+                  <div class="verify-badge unverified">Verify</div>
+                </div>
+                <div class="admin-row">
+                  <div class="admin-avatar" style="background:#9C27B0">F</div>
+                  <div>
+                    <div class="admin-row-name">Fahad Painter</div>
+                    <div class="admin-row-sub">Painter · ★4.5</div>
+                  </div>
+                  <div class="verify-badge unverified">Verify</div>
+                </div>
+                <div class="admin-row">
+                  <div class="admin-avatar" style="background:var(--accent)">A</div>
+                  <div>
+                    <div class="admin-row-name">Ahmed Cleaner</div>
+                    <div class="admin-row-sub">Cleaner · ★4.8</div>
+                  </div>
+                  <div class="verify-badge verified">Verified ✓</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- NOTIFICATIONS -->
+  <div class="content-section" id="section-notifs">
+    <div class="page-header">
+      <div class="page-title">Notifications</div>
+      <div class="page-subtitle">Welcome messages, booking updates and tips</div>
+    </div>
+    <div class="screens-grid">
+      <div class="phone-frame">
+        <div class="phone-frame-label"><div class="dot"></div>Notifications Screen</div>
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-notifs">
+              <div style="background:white;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--divider)">
+                <div style="font-size:14px;font-weight:700">Notifications</div>
+                <div style="font-size:10px;color:var(--primary);font-weight:600">Mark all read</div>
+              </div>
+              <div class="notif-item">
+                <div class="notif-icon-wrap" style="background:rgba(52,168,83,0.15)">👋</div>
+                <div style="flex:1">
+                  <div class="notif-title">Welcome to HomeEase, Ali!</div>
+                  <div class="notif-body">We're glad you're here. Browse trusted service providers near you.</div>
+                  <div class="notif-time">Just now</div>
+                </div>
+                <div class="unread-dot"></div>
+              </div>
+              <div class="notif-item">
+                <div class="notif-icon-wrap" style="background:rgba(249,171,0,0.15)">💡</div>
+                <div style="flex:1">
+                  <div class="notif-title">Getting Started Tip</div>
+                  <div class="notif-body">Tap Services to find providers near you. Filter by category and book instantly.</div>
+                  <div class="notif-time">2 min ago</div>
+                </div>
+                <div class="unread-dot"></div>
+              </div>
+              <div class="notif-item read">
+                <div class="notif-icon-wrap" style="background:rgba(26,115,232,0.1)">✅</div>
+                <div style="flex:1">
+                  <div class="notif-title">Booking Confirmed!</div>
+                  <div class="notif-body">Muhammad Ahmad confirmed your Plumbing booking on Mar 17.</div>
+                  <div class="notif-time">1h ago</div>
+                </div>
+              </div>
+              <div class="notif-item read">
+                <div class="notif-icon-wrap" style="background:rgba(217,48,37,0.1)">❌</div>
+                <div style="flex:1">
+                  <div class="notif-title">Booking Declined</div>
+                  <div class="notif-body">Your Electrical booking was declined. Please try another provider.</div>
+                  <div class="notif-time">Yesterday</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESIGN TOKENS -->
+  <div class="content-section" id="section-tokens">
+    <div class="page-header">
+      <div class="page-title">Design Tokens</div>
+      <div class="page-subtitle">Colors, typography and spacing system</div>
+    </div>
+
+    <div style="color:white;font-size:14px;font-weight:700;margin-bottom:16px">Colors</div>
+    <div class="tokens-grid">
+      <div class="token-card"><div class="token-swatch" style="background:#1A73E8"></div><div class="token-name">Primary</div><div class="token-value">#1A73E8</div></div>
+      <div class="token-card"><div class="token-swatch" style="background:#1557B0"></div><div class="token-name">Primary Dark</div><div class="token-value">#1557B0</div></div>
+      <div class="token-card"><div class="token-swatch" style="background:#E8F0FE;border:1px solid #E8EAED"></div><div class="token-name">Primary Light</div><div class="token-value">#E8F0FE</div></div>
+      <div class="token-card"><div class="token-swatch" style="background:#34A853"></div><div class="token-name">Accent (Green)</div><div class="token-value">#34A853</div></div>
+      <div class="token-card"><div class="token-swatch" style="background:#F9AB00"></div><div class="token-name">Warning</div><div class="token-value">#F9AB00</div></div>
+      <div class="token-card"><div class="token-swatch" style="background:#D93025"></div><div class="token-name">Error</div><div class="token-value">#D93025</div></div>
+      <div class="token-card"><div class="token-swatch" style="background:#202124"></div><div class="token-name">Text Primary</div><div class="token-value">#202124</div></div>
+      <div class="token-card"><div class="token-swatch" style="background:#5F6368"></div><div class="token-name">Text Secondary</div><div class="token-value">#5F6368</div></div>
+      <div class="token-card"><div class="token-swatch" style="background:#F8F9FA;border:1px solid #E8EAED"></div><div class="token-name">Background</div><div class="token-value">#F8F9FA</div></div>
+      <div class="token-card"><div class="token-swatch" style="background:#E8EAED"></div><div class="token-name">Divider</div><div class="token-value">#E8EAED</div></div>
+    </div>
+
+    <div style="color:white;font-size:14px;font-weight:700;margin-bottom:16px">Typography</div>
+    <div class="type-sample">
+      <div class="type-label">Heading 1 — Playfair Display 900</div>
+      <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:white">Welcome Back!</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-label">Heading 2 — Playfair Display 700</div>
+      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:white">My Dashboard</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-label">Body — DM Sans 400</div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:15px;color:rgba(255,255,255,0.7)">Connect with verified, background-checked service professionals in Lahore and beyond.</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-label">Caption — DM Sans 400 · 12px</div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(255,255,255,0.5)">Version 1.0.0 · HomeEase Technologies</div>
+    </div>
+  </div>
+
+  <!-- COMPONENTS -->
+  <div class="content-section" id="section-components">
+    <div class="page-header">
+      <div class="page-title">Components</div>
+      <div class="page-subtitle">Reusable UI components and their states</div>
+    </div>
+    <div class="components-grid">
+
+      <div class="component-card">
+        <div class="component-label">Buttons</div>
+        <div class="primary-btn" style="margin-bottom:8px;border-radius:10px">Primary Button</div>
+        <div style="border:1.5px solid var(--primary);color:var(--primary);border-radius:10px;padding:10px;text-align:center;font-size:12px;font-weight:600;margin-bottom:8px">Outlined Button</div>
+        <div style="background:var(--accent);color:white;border-radius:10px;padding:10px;text-align:center;font-size:12px;font-weight:600;margin-bottom:8px">Accent Button</div>
+        <div style="background:#F3F4F6;color:var(--text-hint);border-radius:10px;padding:10px;text-align:center;font-size:12px;font-weight:600">Disabled Button</div>
+      </div>
+
+      <div class="component-card">
+        <div class="component-label">Status Badges</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <div style="background:rgba(249,171,0,0.15);color:var(--warning);font-size:11px;font-weight:600;padding:4px 10px;border-radius:8px">Pending</div>
+          <div style="background:rgba(26,115,232,0.15);color:var(--primary);font-size:11px;font-weight:600;padding:4px 10px;border-radius:8px">Confirmed</div>
+          <div style="background:rgba(52,168,83,0.15);color:var(--accent);font-size:11px;font-weight:600;padding:4px 10px;border-radius:8px">Completed</div>
+          <div style="background:rgba(217,48,37,0.15);color:var(--error);font-size:11px;font-weight:600;padding:4px 10px;border-radius:8px">Cancelled</div>
+          <div style="background:rgba(52,168,83,0.15);color:var(--accent);font-size:11px;font-weight:600;padding:4px 10px;border-radius:8px">● Online</div>
+          <div style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);font-size:11px;font-weight:600;padding:4px 10px;border-radius:8px">● Offline</div>
+        </div>
+      </div>
+
+      <div class="component-card">
+        <div class="component-label">Input Fields</div>
+        <div style="background:white;border:2px solid var(--primary);border-radius:10px;padding:10px 12px;margin-bottom:8px">
+          <div style="font-size:9px;color:var(--primary);margin-bottom:2px">Email address</div>
+          <div style="font-size:12px;color:var(--text)">ali@example.com</div>
+        </div>
+        <div style="background:white;border:1.5px solid var(--divider);border-radius:10px;padding:10px 12px;margin-bottom:8px">
+          <div style="font-size:9px;color:var(--text-hint);margin-bottom:2px">Password</div>
+          <div style="font-size:12px;color:var(--text-hint)">••••••••</div>
+        </div>
+        <div style="background:#FEF2F2;border:1.5px solid var(--error);border-radius:10px;padding:10px 12px">
+          <div style="font-size:9px;color:var(--error);margin-bottom:2px">Email — Error state</div>
+          <div style="font-size:12px;color:var(--error)">Invalid email address</div>
+        </div>
+      </div>
+
+      <div class="component-card">
+        <div class="component-label">Provider Card</div>
+        <div style="background:white;border-radius:12px;padding:12px;display:flex;gap:10px">
+          <div style="width:44px;height:44px;border-radius:12px;background:var(--primary);display:flex;align-items:center;justify-content:center;color:white;font-size:18px;font-weight:700">M</div>
+          <div style="flex:1">
+            <div style="font-size:13px;font-weight:700;display:flex;align-items:center;gap:4px">Muhammad Ahmad <span style="color:var(--primary);font-size:12px">✓</span></div>
+            <div style="font-size:10px;color:var(--text-sec)">Plumber · Mason</div>
+            <div style="font-size:10px;color:var(--warning)">★★★★★ 4.9 (127)</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:13px;font-weight:700;color:var(--primary)">Rs.800</div>
+            <div style="font-size:9px;color:var(--text-hint)">/hour</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="component-card">
+        <div class="component-label">Category Chips</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <div style="background:var(--primary);color:white;font-size:11px;font-weight:600;padding:5px 14px;border-radius:20px">All</div>
+          <div style="background:white;color:var(--text-sec);font-size:11px;border:1px solid var(--divider);padding:5px 14px;border-radius:20px">Plumber</div>
+          <div style="background:white;color:var(--text-sec);font-size:11px;border:1px solid var(--divider);padding:5px 14px;border-radius:20px">Electrician</div>
+          <div style="background:white;color:var(--text-sec);font-size:11px;border:1px solid var(--divider);padding:5px 14px;border-radius:20px">Cleaner</div>
+        </div>
+      </div>
+
+      <div class="component-card">
+        <div class="component-label">Star Rating</div>
+        <div style="display:flex;gap:6px;margin-bottom:10px">
+          <span style="font-size:24px">⭐</span><span style="font-size:24px">⭐</span><span style="font-size:24px">⭐</span><span style="font-size:24px">⭐</span><span style="font-size:24px">☆</span>
+        </div>
+        <div style="font-size:12px;color:var(--primary);font-weight:600">Very Good — Exceeded expectations</div>
+        <div style="display:flex;align-items:center;gap:4px;margin-top:8px">
+          <div style="font-size:20px;font-weight:800;color:var(--text)">4.9</div>
+          <div>
+            <div style="font-size:10px;color:var(--warning)">★★★★★</div>
+            <div style="font-size:10px;color:var(--text-hint)">127 reviews</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FLOWS -->
+  <div class="content-section" id="section-flows">
+    <div class="page-header">
+      <div class="page-title">User Flows</div>
+      <div class="page-subtitle">Key journeys through the app</div>
+    </div>
+
+    <div class="flow-container">
+      <div class="flow-title">🏠 New User Flow</div>
+      <div class="flow-row">
+        <div class="flow-node">Splash</div><div class="flow-arrow">→</div>
+        <div class="flow-node">Onboarding (4 screens)</div><div class="flow-arrow">→</div>
+        <div class="flow-node">Login / Sign Up</div><div class="flow-arrow">→</div>
+        <div class="flow-node green">Home Screen</div>
+      </div>
+    </div>
+
+    <div class="flow-container">
+      <div class="flow-title">📅 Booking Flow</div>
+      <div class="flow-row">
+        <div class="flow-node">Browse Services</div><div class="flow-arrow">→</div>
+        <div class="flow-node">Provider Profile</div><div class="flow-arrow">→</div>
+        <div class="flow-node">Book Now</div><div class="flow-arrow">→</div>
+        <div class="flow-node">Select Date/Time</div><div class="flow-arrow">→</div>
+        <div class="flow-node yellow">Payment</div><div class="flow-arrow">→</div>
+        <div class="flow-node green">Confirmed ✓</div>
+      </div>
+    </div>
+
+    <div class="flow-container">
+      <div class="flow-title">🔧 Provider Flow</div>
+      <div class="flow-row">
+        <div class="flow-node">Sign Up</div><div class="flow-arrow">→</div>
+        <div class="flow-node">Setup Profile (4 steps)</div><div class="flow-arrow">→</div>
+        <div class="flow-node yellow">Pending Verification</div><div class="flow-arrow">→</div>
+        <div class="flow-node green">Admin Verifies ✓</div><div class="flow-arrow">→</div>
+        <div class="flow-node green">Live on Platform</div>
+      </div>
+    </div>
+
+    <div class="flow-container">
+      <div class="flow-title">⭐ Review Flow</div>
+      <div class="flow-row">
+        <div class="flow-node">Booking Completed</div><div class="flow-arrow">→</div>
+        <div class="flow-node">Rate Service button appears</div><div class="flow-arrow">→</div>
+        <div class="flow-node">Select Stars + Comment</div><div class="flow-arrow">→</div>
+        <div class="flow-node green">Rating saved · Provider notified</div>
+      </div>
+    </div>
+
+    <div class="flow-container">
+      <div class="flow-title">🛡️ Admin Verification Flow</div>
+      <div class="flow-row">
+        <div class="flow-node">Provider signs up</div><div class="flow-arrow">→</div>
+        <div class="flow-node yellow">You get notified</div><div class="flow-arrow">→</div>
+        <div class="flow-node">Contact via WhatsApp/Call</div><div class="flow-arrow">→</div>
+        <div class="flow-node">Admin Dashboard → Verify</div><div class="flow-arrow">→</div>
+        <div class="flow-node green">Blue ✓ badge appears</div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+</div>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+  document.getElementById('section-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>

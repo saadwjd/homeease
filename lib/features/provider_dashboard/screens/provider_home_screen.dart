@@ -726,8 +726,10 @@ class _ProviderProfileTabState extends ConsumerState<_ProviderProfileTab> {
                       'skills': _selectedServices,
                       'gender': _selectedGender,
                     });
-                    if (mounted) ScaffoldMessenger.of(context).showSnackBar(
+                    if (mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Profile updated!')));
+                    }
                   }
                   setState(() => _isEditing = !_isEditing);
                 },
@@ -746,7 +748,7 @@ class _ProviderProfileTabState extends ConsumerState<_ProviderProfileTab> {
           // Gender dropdown
           _isEditing
               ? DropdownButtonFormField<String>(
-                  value: _selectedGender,
+                  initialValue: _selectedGender,
                   decoration: const InputDecoration(labelText: 'Gender', prefixIcon: Icon(Icons.person_outline)),
                   items: ['Male', 'Female', 'Prefer not to say']
                       .map((g) => DropdownMenuItem(value: g, child: Text(g))).toList(),

@@ -12,6 +12,10 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/router/app_router.dart';
 import '../../support/screens/help_support_screen.dart';
 import '../../support/screens/about_screen.dart';
+import '../../admin/admin_dashboard_screen.dart';
+
+// Admin emails list — must match admin_dashboard_screen.dart
+const List<String> kAdminEmails = ['saadwajid65@gmail.com'];
 
 class UserDashboardScreen extends ConsumerStatefulWidget {
   const UserDashboardScreen({super.key});
@@ -556,6 +560,21 @@ class _SettingsTab extends ConsumerWidget {
               title: 'Notifications',
               subtitle: 'View your notifications',
               onTap: () => context.push(AppRoutes.notifications),
+            ),
+
+            // Admin-only tile
+            FutureBuilder<DocumentSnapshot>(
+              future: firestore.collection('users').doc(userId).get(),
+              builder: (context, snap) {
+                final email = (snap.data?.data() as Map<String, dynamic>?)?['email'] ?? '';
+                if (!kAdminEmails.contains(email)) return const SizedBox.shrink();
+                return _SettingsTile(
+                  icon: Icons.admin_panel_settings_outlined,
+                  title: 'Admin Dashboard',
+                  subtitle: 'Manage users, providers & bookings',
+                  onTap: () => context.push(AppRoutes.adminDashboard),
+                );
+              },
             ),
             _SettingsTile(
               icon: Icons.help_outline,

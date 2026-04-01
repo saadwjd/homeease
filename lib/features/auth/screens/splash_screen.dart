@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import '../providers/auth_provider.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../onboarding/onboarding_screen.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -40,10 +42,26 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
   }
 
   Future<void> _navigateBasedOnAuth() async {
+    final box = Hive.box('userPreferences');
+    final onboardingDone = box.get('onboardingComplete', defaultValue: false);
+
+    // Show onboarding for first-time users who are not logged in
     final authState = ref.read(authStateProvider);
     final user = authState.value;
 
     if (user == null) {
+      if (!onboardingDone && mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (_) => OnboardingScreen(
+              onComplete: () {
+                if (mounted) context.go(AppRoutes.login);
+              },
+            ),
+          ),
+        );
+        return;
+      }
       if (mounted) context.go(AppRoutes.login);
       return;
     }

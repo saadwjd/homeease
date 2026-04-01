@@ -17,6 +17,7 @@ import '../../features/maps/screens/map_screen.dart';
 import '../../features/notifications/notifications_screen.dart';
 import '../../features/user_dashboard/screens/user_dashboard_screen.dart';
 import '../../features/chat/screens/chat_screen.dart';
+import '../../features/admin/admin_dashboard_screen.dart';
 import 'shell_screen.dart';
 
 class AppRoutes {
@@ -35,6 +36,7 @@ class AppRoutes {
   static const notifications = '/notifications';
   static const userDashboard = '/account';
   static const chat = '/chat/:otherUserId';
+  static const adminDashboard = '/admin';
 }
 
 final appRouterProvider = Provider<GoRouter>((ref) {
@@ -56,6 +58,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(path: AppRoutes.providerOnboarding, builder: (c, s) => const ProviderOnboardingScreen()),
       GoRoute(path: AppRoutes.providerDashboard, builder: (c, s) => const ProviderHomeScreen()),
       GoRoute(path: AppRoutes.notifications, builder: (c, s) => const NotificationsScreen()),
+      GoRoute(path: AppRoutes.adminDashboard, builder: (c, s) => const AdminDashboardScreen()),
       GoRoute(
         path: AppRoutes.providerProfile,
         builder: (c, s) => ProviderProfileScreen(providerId: s.pathParameters['providerId']!),

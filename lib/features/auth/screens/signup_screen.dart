@@ -21,6 +21,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
   UserRole _selectedRole = UserRole.user;
   bool _obscurePassword = true;
   bool _isLoading = false;
+  bool _acceptedTerms = false;
   String? _errorMessage;
 
   @override
@@ -37,6 +38,14 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
       _isLoading = true;
       _errorMessage = null;
     });
+
+    if (!_acceptedTerms) {
+      setState(() {
+        _errorMessage = 'Please accept the Terms of Service to continue';
+        _isLoading = false;
+      });
+      return;
+    }
 
     if (_passwordController.text != _confirmPasswordController.text) {
       setState(() {
@@ -182,6 +191,58 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 decoration: const InputDecoration(
                   labelText: 'Confirm Password',
                   prefixIcon: Icon(Icons.lock_outlined),
+                ),
+              ),
+
+              // ── Terms & Conditions ─────────────────────────────────
+              const SizedBox(height: AppSpacing.md),
+              Container(
+                decoration: BoxDecoration(
+                  color: _acceptedTerms ? AppColors.accentLight : AppColors.backgroundLight,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: _acceptedTerms ? AppColors.accent : AppColors.divider,
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Checkbox(
+                      value: _acceptedTerms,
+                      activeColor: AppColors.accent,
+                      onChanged: (val) => setState(() => _acceptedTerms = val ?? false),
+                    ),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () => setState(() => _acceptedTerms = !_acceptedTerms),
+                        child: RichText(
+                          text: TextSpan(
+                            style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                            children: [
+                              const TextSpan(text: 'I agree to the '),
+                              TextSpan(
+                                text: 'Terms of Service',
+                                style: const TextStyle(
+                                  color: AppColors.primary,
+                                  fontWeight: FontWeight.w600,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                              const TextSpan(text: ' and '),
+                              TextSpan(
+                                text: 'Privacy Policy',
+                                style: const TextStyle(
+                                  color: AppColors.primary,
+                                  fontWeight: FontWeight.w600,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                  ],
                 ),
               ),
 

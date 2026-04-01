@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../auth/providers/auth_provider.dart';
 import '../models/booking_model.dart';
 import '../../../core/theme/app_theme.dart';
+import 'rating_screen.dart';
 
 class BookingDetailScreen extends ConsumerStatefulWidget {
   final String bookingId;
@@ -164,7 +165,55 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                     ),
                   ),
                 ],
-                const SizedBox(height: 40),
+                // Rate button for completed bookings
+                if (booking.status == BookingStatus.completed) ...[ 
+                  const SizedBox(height: 20),
+                  FutureBuilder<DocumentSnapshot>(
+                    future: firestore.collection('bookings').doc(widget.bookingId).get(),
+                    builder: (context, snap) {
+                      final isReviewed = (snap.data?.data() as Map<String, dynamic>?)?['isReviewed'] ?? false;
+                      if (isReviewed) {
+                        return Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: AppColors.accentLight,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: const Row(
+                            children: [
+                              Icon(Icons.check_circle, color: AppColors.accent),
+                              SizedBox(width: 10),
+                              Text('You\'ve reviewed this service',
+                                  style: TextStyle(color: AppColors.accent, fontWeight: FontWeight.w600)),
+                            ],
+                          ),
+                        );
+                      }
+                      return ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => RatingScreen(
+                                bookingId: widget.bookingId,
+                                providerId: booking.providerId,
+                                providerName: booking.providerName,
+                                serviceType: booking.serviceType,
+                              ),
+                            ),
+                          );
+                        },
+                        icon: const Icon(Icons.star_outline),
+                        label: const Text('Rate This Service'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFF9AB00),
+                          foregroundColor: Colors.white,
+                          minimumSize: const Size(double.infinity, 52),
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ],
             ),
           );
